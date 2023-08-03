@@ -46,7 +46,7 @@ function App() {
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
-              transition: 'all 1s ease-in',
+              transition: 'background-image 0.75s ease-in',
               height: '100vh',
               width: '100vw'
             }}
