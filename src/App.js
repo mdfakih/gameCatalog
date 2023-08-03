@@ -63,9 +63,9 @@ function App() {
             />
           </Col >
         ) : (
-          <Row className='m-0 d-flex flex-row justify-content-center align-content-center w-100 h-100'>
+          <Row>
             <Col>
-              <Spinner />
+              <h1>NO GAMES AVAILABLE!</h1>
             </Col>
           </Row>
         )
