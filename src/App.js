@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Col } from 'reactstrap';
+import { Col, Row, Spinner } from 'reactstrap';
 import Game from './components/Game';
 
 function App() {
@@ -11,6 +11,7 @@ function App() {
   const [currFrancIndex, setCurrFrancIndex] = useState(0)
   const [currFranchise, setCurrFranchise] = useState([])
   const [bgimage, setBgImage] = useState('')
+  const [currTitle, setCurrTitle] = useState('')
   const [titleImg, setTitleImg] = useState('')
 
   const getData = async () => {
@@ -25,9 +26,10 @@ function App() {
     }
   }
 
-  const imageSet = (background, title) => {
+  const imageSet = (background, title, name) => {
     setBgImage(background)
     setTitleImg(title)
+    setCurrTitle(name)
   }
 
   useEffect(() => {
@@ -55,12 +57,17 @@ function App() {
               games={games}
               currFrancIndex={currFrancIndex}
               setCurrFrancIndex={setCurrFrancIndex}
+              currTitle={currTitle}
               titleImg={titleImg}
               imageSet={imageSet}
             />
           </Col >
         ) : (
-          <p>No games available</p >
+          <Row className='m-0'>
+            <Col>
+              <Spinner />
+            </Col>
+          </Row>
         )
       }
     </>

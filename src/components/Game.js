@@ -3,33 +3,16 @@ import { Button, Col, Row } from 'reactstrap'
 import '../styles/game.css'
 import useKeyPress from '../hooks/useKeyPress'
 
-const Game = ({ data, games, currFrancIndex, setCurrFrancIndex, imageSet, titleImg }) => {
+const Game = ({ data, games, currFrancIndex, setCurrFrancIndex, imageSet, currTitle, titleImg }) => {
     console.log('currFranc', data)
 
-    // const downPress = useKeyPress("ArrowDown");
-    // const upPress = useKeyPress("ArrowUp");
-    const leftPress = useKeyPress("ArrowLeft");
-    const rightPress = useKeyPress("ArrowRight");
-    const enterPress = useKeyPress("Enter");
-    const [cursor, setCursor] = useState(0);
-
-    // useEffect(() => {
-    //     if (data.length && downPress) {
-    //         setCursor(prevState =>
-    //             prevState < data.length - 1 ? prevState + 1 : prevState
-    //         );
-    //     }
-    // }, [downPress]);
-
-    // useEffect(() => {
-    //     if (data.length && upPress) {
-    //         setCursor(prevState => (prevState > 0 ? prevState - 1 : prevState));
-    //     }
-    // }, [upPress]);
+    const leftPress = useKeyPress("ArrowLeft")
+    const rightPress = useKeyPress("ArrowRight")
+    const [cursor, setCursor] = useState(0)
 
     useEffect(() => {
         if (data.length && rightPress) {
-            setCursor(prevState => prevState < data.length - 1 ? prevState + 1 : prevState);
+            setCursor(prevState => prevState < data.length - 1 ? prevState + 1 : prevState)
         }
         if (cursor === data.length - 1 && rightPress && currFrancIndex < games.length - 1) {
             setCurrFrancIndex(prev => prev + 1)
@@ -39,12 +22,11 @@ const Game = ({ data, games, currFrancIndex, setCurrFrancIndex, imageSet, titleI
             setCurrFrancIndex(0)
             setCursor(0)
         }
-    }, [rightPress]);
+    }, [rightPress])
 
     useEffect(() => {
         if (data.length && leftPress) {
-            setCursor(prevState => (prevState > 0 ? prevState - 1 : prevState));
-            // setSelected(data[cursor])
+            setCursor(prevState => (prevState > 0 ? prevState - 1 : prevState))
         }
         if (cursor === 0 && leftPress && currFrancIndex <= games.length - 1) {
             setCurrFrancIndex(prev => prev - 1)
@@ -54,17 +36,11 @@ const Game = ({ data, games, currFrancIndex, setCurrFrancIndex, imageSet, titleI
             setCurrFrancIndex(games.length - 1)
             setCursor(0)
         }
-    }, [leftPress]);
-
-    // useEffect(() => {
-    //     if (data.length && enterPress) {
-    //         setSelected(data[cursor]);
-    //     }
-    // }, [cursor, enterPress]);
+    }, [leftPress])
 
 
     useEffect(() => {
-        imageSet(data[0].background_image, data[0].title_icon)
+        imageSet(data[0].background_image, data[0].title_icon, data[0].title)
     }, [data])
 
     return (
@@ -74,23 +50,25 @@ const Game = ({ data, games, currFrancIndex, setCurrFrancIndex, imageSet, titleI
                     {
                         data && data.map((game, i) => {
                             if (i === cursor) {
-                                imageSet(game.background_image, game.title_icon)
+                                imageSet(game.background_image, game.title_icon, game.title)
                             }
                             return (
                                 <div
                                     className={i === cursor ? 'm-1 active logoDiv' : 'm-1 logoDiv'}
-                                    onClick={() => imageSet(game.background_image, game.title_icon)}
+                                    onClick={() => imageSet(game.background_image, game.title_icon, game.title)}
                                 >
                                     <img
                                         className={i === cursor ? 'logoImgActive' : 'logoImg'}
                                         src={game.cover_image}
                                         alt='icon'
                                     />
-                                    {/* <p>{game.title}</p> */}
                                 </div>
                             )
                         })
                     }
+                </Col>
+                <Col>
+                    <p className='text-danger fw-normal fs-5'>{currTitle}</p>
                 </Col>
                 <Col className='p-5 d-flex flex-column'>
                     <img src={titleImg} alt='title' height={200} width={200} />

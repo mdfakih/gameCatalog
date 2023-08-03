@@ -6,15 +6,15 @@ const useKeyPress = (targetKey) => {
     useEffect(() => {
         const downHandler = ({ key }) => {
             if (key === targetKey) {
-                setKeyPressed(true);
+                setKeyPressed(true)
             }
         }
 
         const upHandler = ({ key }) => {
             if (key === targetKey) {
-                setKeyPressed(false);
+                setKeyPressed(false)
             }
-        };
+        }
 
         const leftHandler = ({ key }) => {
             if (key === targetKey) {
@@ -27,20 +27,20 @@ const useKeyPress = (targetKey) => {
             }
         }
 
-        window.addEventListener("keydown", downHandler);
-        window.addEventListener("keyup", upHandler);
-        window.addEventListener("keyLeft", leftHandler);
-        window.addEventListener("keyRight", rightHandler);
+        window.addEventListener("keydown", downHandler)
+        window.addEventListener("keyup", upHandler)
+        window.addEventListener("keyLeft", leftHandler)
+        window.addEventListener("keyRight", rightHandler)
 
         return () => {
-            window.removeEventListener("keydown", downHandler);
-            window.removeEventListener("keyup", upHandler);
-            window.removeEventListener("keyLeft", leftHandler);
-            window.removeEventListener("keyRight", rightHandler);
+            window.removeEventListener("keydown", downHandler)
+            window.removeEventListener("keyup", upHandler)
+            window.removeEventListener("keyLeft", leftHandler)
+            window.removeEventListener("keyRight", rightHandler)
         };
-    }, [targetKey]);
+    }, [targetKey])
 
-    return keyPressed;
-};
+    return keyPressed
+}
 
 export default useKeyPress
