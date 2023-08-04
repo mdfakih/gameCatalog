@@ -23,6 +23,10 @@ const Game = ({
     const [cursor, setCursor] = useState(0)
 
     useEffect(() => {
+        setCursor(0)
+    }, [currFrancIndex])
+
+    useEffect(() => {
         if (data.length && rightPress && cursorLvl === 1) {
             setCursor(prev => prev < data.length - 1 ? prev + 1 : prev)
         }
