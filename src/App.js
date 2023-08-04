@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Col, Row, Spinner } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import Game from './components/Game';
 
 function App() {
@@ -13,6 +13,8 @@ function App() {
   const [bgimage, setBgImage] = useState('')
   const [currTitle, setCurrTitle] = useState('')
   const [titleImg, setTitleImg] = useState('')
+
+  const [cursorLvl, setCursorLvl] = useState(1)
 
   const getData = async () => {
     try {
@@ -38,6 +40,7 @@ function App() {
 
   return (
     <>
+      {console.log('cursorl', cursorLvl)}
       {
         games && games.length > 0 ? (
           <Col
@@ -51,7 +54,14 @@ function App() {
               width: '100vw'
             }}
           >
-            <Header data={games} currFrancIndex={currFrancIndex} setCurrFrancIndex={setCurrFrancIndex} setCurrFranchise={setCurrFranchise} />
+            <Header
+              data={games}
+              currFrancIndex={currFrancIndex}
+              setCurrFrancIndex={setCurrFrancIndex}
+              setCurrFranchise={setCurrFranchise}
+              cursorLvl={cursorLvl}
+              setCursorLvl={setCursorLvl}
+            />
             <Game
               data={currFranchise.titles}
               games={games}
@@ -60,6 +70,8 @@ function App() {
               currTitle={currTitle}
               titleImg={titleImg}
               imageSet={imageSet}
+              cursorLvl={cursorLvl}
+              setCursorLvl={setCursorLvl}
             />
           </Col >
         ) : (
