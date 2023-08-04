@@ -71,7 +71,7 @@ const Game = ({ data, games, currFrancIndex, setCurrFrancIndex, imageSet, currTi
                     }
                 </Col>
                 <Col>
-                    <p className='text-danger fw-normal fs-5'>{currTitle}</p>
+                    <p className='text-light fw-normal fs-5'>{currTitle}</p>
                 </Col>
                 <Col className='p-5 d-flex flex-column'>
                     <img src={titleImg} alt='title' height={200} width={200} />

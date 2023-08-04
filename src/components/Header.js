@@ -1,10 +1,17 @@
-import React from 'react'
-import { Col, Row } from 'reactstrap'
+import React, { useState } from 'react'
+import { Col, Collapse, Nav, NavItem, NavLink, Navbar, NavbarText, NavbarToggler } from 'reactstrap'
+import { CiSearch, CiSettings } from 'react-icons/ci'
+import Avatar from 'react-avatar'
+import moment from 'moment'
 
 const Header = ({ data, currFrancIndex, setCurrFrancIndex, setCurrFranchise }) => {
     console.log('main', data)
+
+    const [collapsed, setCollapsed] = useState(true)
+    const toggleNavbar = () => setCollapsed(!collapsed)
+
     return (
-        <Row style={{ height: 60 }} className='m-0 d-flex flex-row justify-content-between align-items-center'>
+        <Navbar expand={"md"}>
             <Col className='d-flex flex-row '>
                 {data && data.map((game, i) => {
                     if (i === currFrancIndex) {
@@ -12,7 +19,8 @@ const Header = ({ data, currFrancIndex, setCurrFrancIndex, setCurrFranchise }) =
                     }
                     return (
                         <p
-                            className={i === currFrancIndex ? 'm-3 fs-4 fw-bold text-primary' : 'm-3 fs-5 fw-light text-light'}
+                            className={i === currFrancIndex ? 'm-3 fs-6 fw-bold text-light' : 'm-3 fs-6 fw-light text-secondary'}
+                            style={{ cursor: 'pointer' }}
                             key={game.franchisee}
                             onClick={() => {
                                 setCurrFranchise(game)
@@ -24,10 +32,28 @@ const Header = ({ data, currFrancIndex, setCurrFrancIndex, setCurrFranchise }) =
                     )
                 })}
             </Col>
-            <Col className='d-flex flex-row align-items-center justify-content-end'>
-                <p>icons</p>
-            </Col>
-        </Row>
+            <NavbarToggler onClick={toggleNavbar} className="me-2" />
+            <Collapse className='justify-content-end' isOpen={!collapsed} navbar>
+                <Nav navbar>
+                    <NavItem>
+                        <NavLink href="#"><CiSearch color='#FFFFFF' size={25} /></NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="#"><CiSettings color='#FFFFFF' size={25} /></NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="#">
+                            <Avatar name="Gamer" size={25} round="50%" />
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="#">
+                            <NavbarText className='text-light'>{moment().format('LT')}</NavbarText>
+                        </NavLink>
+                    </NavItem>
+                </Nav>
+            </Collapse>
+        </Navbar>
     )
 }
 
