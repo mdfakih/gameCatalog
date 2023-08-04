@@ -19,8 +19,8 @@
 .logoImgActive {
   border-radius: 10px;
   object-fit: cover;
-  height: 100px;
-  width: 100px;
+  height: 98px;
+  width: 98px;
   transition: all 0.85s ease;
 }
 
