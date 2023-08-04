@@ -4,8 +4,11 @@ import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row } from 'reactstrap';
 import Game from './components/Game';
+import { MutatingDots } from 'react-loader-spinner';
 
 function App() {
+
+  const [load, setLoad] = useState(true)
 
   const [games, setGames] = useState([])
   const [currFrancIndex, setCurrFrancIndex] = useState(0)
@@ -22,9 +25,12 @@ function App() {
       if (response.data) {
         setGames(response.data.games)
         setCurrFranchise(response.data.games[0])
+        setLoad(false)
       }
     } catch (err) {
       console.log('err', err)
+      setGames([])
+      setLoad(false)
     }
   }
 
@@ -40,9 +46,24 @@ function App() {
 
   return (
     <>
-      {console.log('cursorl', cursorLvl)}
       {
-        games && games.length > 0 ? (
+        load ? (
+          <Row className='m-0 vh-100'>
+            <Col className='d-flex flex-row justify-content-center align-items-center'>
+              <MutatingDots
+                height="100"
+                width="100"
+                color="#8000ff"
+                secondaryColor='#8000ff'
+                radius='15'
+                ariaLabel="mutating-dots-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+              />
+            </Col>
+          </Row>
+        ) : games && games.length > 0 && !load ? (
           <Col
             style={{
               backgroundImage: `url(${bgimage})`,
@@ -75,8 +96,8 @@ function App() {
             />
           </Col >
         ) : (
-          <Row>
-            <Col>
+          <Row className='m-0 vh-100'>
+            <Col className='d-flex flex-row justify-content-center align-items-center'>
               <h1>NO GAMES AVAILABLE!</h1>
             </Col>
           </Row>
