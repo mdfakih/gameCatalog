@@ -55,7 +55,10 @@ const Game = ({ data, games, currFrancIndex, setCurrFrancIndex, imageSet, currTi
                             return (
                                 <div
                                     className={i === cursor ? 'm-1 active logoDiv' : 'm-1 logoDiv'}
-                                    onClick={() => imageSet(game.background_image, game.title_icon, game.title)}
+                                    onClick={() => {
+                                        imageSet(game.background_image, game.title_icon, game.title)
+                                        setCursor(i)
+                                    }}
                                 >
                                     <img
                                         className={i === cursor ? 'logoImgActive' : 'logoImg'}
